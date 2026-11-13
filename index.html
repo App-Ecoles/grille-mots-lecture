@@ -21,6 +21,7 @@
         .btn-gen { background: #2563eb; color: white; }
         .btn-print { background: #10b981; color: white; }
         .btn-syll { background: #64748b; color: white; font-size: 0.8em; margin-top: 5px; }
+        .pdf-hint { font-size: 0.8em; color: #64748b; margin: 10px 0 0; text-align: center; font-style: italic; }
 
         /* Style de la Grille */
         #print-area { background: white; padding: 40px; border-radius: 8px; min-height: 400px; }
@@ -75,8 +76,9 @@
 
         <div class="btn-group">
             <button class="btn-gen" onclick="generateGrid()">Générer la grille</button>
-            <button class="btn-print" onclick="window.print()">Imprimer la fiche</button>
+            <button class="btn-print" onclick="printOrSave()">🖨️ Imprimer ou enregistrer en PDF</button>
         </div>
+        <p class="pdf-hint">💡 Pour enregistrer sans imprimer : dans la fenêtre qui s'ouvre, choisissez « Enregistrer au format PDF » comme destination (ou « Microsoft Print to PDF » sous Windows).</p>
     </div>
 
     <div id="print-area">
@@ -149,6 +151,13 @@
                 container.appendChild(emptyCell);
             }
         }
+    }
+
+    function printOrSave() {
+        if (!document.getElementById('gridContainer').children.length) {
+            return alert("Générez d'abord la grille, puis cliquez sur ce bouton.");
+        }
+        window.print();
     }
 
     window.onload = function() {
